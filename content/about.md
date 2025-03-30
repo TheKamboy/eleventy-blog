@@ -6,4 +6,8 @@ const eleventyNavigation = {
 ---
 # About
 
-I am a person that writes stuff.
+My name is **Kamie**.
+
+I post about my life, my projects, and more!
+
+Stay tuned!
