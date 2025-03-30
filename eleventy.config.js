@@ -1,4 +1,8 @@
-import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
+import {
+	IdAttributePlugin,
+	InputPathToUrlTransformPlugin,
+	HtmlBasePlugin,
+} from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
@@ -6,11 +10,12 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
 import pluginFilters from "./_config/filters.js";
 
+
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
-export default async function(eleventyConfig) {
+export default async function (eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
-		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+		if (data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
 			return false;
 		}
 	});
@@ -19,7 +24,7 @@ export default async function(eleventyConfig) {
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig
 		.addPassthroughCopy({
-			"./public/": "/"
+			"./public/": "/",
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
 
@@ -41,11 +46,31 @@ export default async function(eleventyConfig) {
 
 	// Official plugins
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-		preAttributes: { tabindex: 0 }
+		preAttributes: { tabindex: 0 },
 	});
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
+	eleventyConfig.addPlugin(IdAttributePlugin, {
+		selector: "title,sub-title,h1,h2,h3,h4,h5,h6", // default
+
+		// swaps html entities (like &amp;) to their counterparts before slugify-ing
+		decodeEntities: true,
+
+		// check for duplicate `id` attributes in application code?
+		checkDuplicates: "error", // `false` to disable
+
+		// by default we use Eleventy’s built-in `slugify` filter:
+		slugify: eleventyConfig.getFilter("slugify"),
+
+		filter: function({ page }) {
+			if(page.inputPath.endsWith("test-skipped.html")) {
+				return false; // skip
+			}
+
+			return true;
+		}
+	});
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "atom", // or "rss", "json"
@@ -54,8 +79,8 @@ export default async function(eleventyConfig) {
 		templateData: {
 			eleventyNavigation: {
 				key: "Feed",
-				order: 4
-			}
+				order: 4,
+			},
 		},
 		collection: {
 			name: "posts",
@@ -65,11 +90,11 @@ export default async function(eleventyConfig) {
 			language: "en",
 			title: "Blog Title",
 			subtitle: "This is a longer description about your blog.",
-			base: "https://example.com/",
+			base: "https://kamies-blog.netlify.app/",
 			author: {
-				name: "Your Name"
-			}
-		}
+				name: "Kamie",
+			},
+		},
 	});
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
@@ -85,7 +110,7 @@ export default async function(eleventyConfig) {
 				// e.g. <img loading decoding> assigned on the HTML tag will override these values.
 				loading: "lazy",
 				decoding: "async",
-			}
+			},
 		},
 
 		sharpOptions: {
@@ -96,14 +121,8 @@ export default async function(eleventyConfig) {
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 
-	eleventyConfig.addPlugin(IdAttributePlugin, {
-		// by default we use Eleventy’s built-in `slugify` filter:
-		// slugify: eleventyConfig.getFilter("slugify"),
-		// selector: "h1,h2,h3,h4,h5,h6", // default
-	});
-
 	eleventyConfig.addShortcode("currentBuildDate", () => {
-		return (new Date()).toISOString();
+		return new Date().toISOString();
 	});
 
 	// Features to make your build faster (when you need them)
@@ -113,18 +132,12 @@ export default async function(eleventyConfig) {
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
 	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
-};
+}
 
 export const config = {
 	// Control which files Eleventy will process
 	// e.g.: *.md, *.njk, *.html, *.liquid
-	templateFormats: [
-		"md",
-		"njk",
-		"html",
-		"liquid",
-		"11ty.js",
-	],
+	templateFormats: ["md", "njk", "html", "liquid", "11ty.js"],
 
 	// Pre-process *.md files with: (default: `liquid`)
 	markdownTemplateEngine: "njk",
@@ -134,10 +147,10 @@ export const config = {
 
 	// These are all optional:
 	dir: {
-		input: "content",          // default: "."
-		includes: "../_includes",  // default: "_includes" (`input` relative)
-		data: "../_data",          // default: "_data" (`input` relative)
-		output: "_site"
+		input: "content", // default: "."
+		includes: "../_includes", // default: "_includes" (`input` relative)
+		data: "../_data", // default: "_data" (`input` relative)
+		output: "_site",
 	},
 
 	// -----------------------------------------------------------------
