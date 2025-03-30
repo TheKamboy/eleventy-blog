@@ -8,15 +8,14 @@ tags: ["documentation", "go"]
 ---
 **Table of Contents:**
 - [SCM: Usage](#scm-usage)
-	- [Yes or No Menu](#yes-or-no-menu)
-	- [Selection Menu](#selection-menu)
-	- [Multi Selection Menu](#multi-selection-menu)
+	- [Yes or No Menu `[1.0+]`](#yes-or-no-menu-10)
+	- [Selection Menu `[1.0+]`](#selection-menu-10)
+	- [Multi Selection Menu `[2.0+]`](#multi-selection-menu-20)
 ---
 
 # SCM: Usage
 
-## Yes or No Menu
-![Static Badge](https://img.shields.io/badge/Version-1.0%2B-orange?style=for-the-badge)
+## Yes or No Menu `[1.0+]`
 
 Prompts the user with a question that can be answered with **Yes** or **No**.
 
@@ -52,8 +51,7 @@ if getoption == "y" {
 }
 ```
 
-## Selection Menu
-![Static Badge](https://img.shields.io/badge/Version-1.0%2B-orange?style=for-the-badge)
+## Selection Menu `[1.0+]`
 
 Gives the user multiple options to choose from.
 
@@ -99,8 +97,7 @@ if getoption == 1 {
 }
 ```
 
-## Multi Selection Menu
-![Static Badge](https://img.shields.io/badge/Version-2.0%2B-purple?style=for-the-badge)
+## Multi Selection Menu `[2.0+]`
 
 This is the same as the Selection Menu, but allows the user to select multiple options.
 
