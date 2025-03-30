@@ -7,6 +7,7 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
 import pluginFilters from "./_config/filters.js";
 
@@ -71,6 +72,7 @@ export default async function (eleventyConfig) {
 			return true;
 		}
 	});
+	eleventyConfig.addPlugin(syntaxHighlight);
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "atom", // or "rss", "json"

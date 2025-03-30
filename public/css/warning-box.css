@@ -1,0 +1,18 @@
+/* Message Box */
+.warning-box {
+	--color-warning-box: rgb(255, 255, 170);
+
+	display: block;
+	background-color: var(--color-warning-box);
+	color: var(--color-gray-90);
+	padding: 1em 0.625em; /* 16px 10px /16 */
+}
+.warning-box ol {
+	margin-top: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+	.warning-box {
+		--color-warning-box: rgba(250, 179, 135, 0.4);
+	}
+}
