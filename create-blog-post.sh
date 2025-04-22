@@ -12,5 +12,3 @@ if [ -z $name ]; then
 fi
 
 cp $SCRIPTPATH/example.md $SCRIPTPATH/content/blog/$YEAR/$name.md || exit
-
-gum confirm "Open Post?" && $EDITOR $SCRIPTPATH/content/blog/$YEAR/$name.md
