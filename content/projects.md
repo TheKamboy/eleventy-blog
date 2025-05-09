@@ -7,9 +7,12 @@ const eleventyNavigation = {
 
 ---
 **Table of Contents:**
+
 - [Projects](#projects)
-	- [The Loop Rooms](#the-loop-rooms)
-	- [Coming Soon...](#coming-soon)
+  - [The Loop Rooms](#the-loop-rooms)
+  - [My Utility Bot](#my-utility-bot)
+  - [Coming Soon...](#coming-soon)
+
 ---
 
 # Projects
@@ -25,6 +28,11 @@ The episodes I've worked on:
 - Chapter 3: As a builder.
 - Chapter 6: As Dr. Micheal.
 
-## Coming Soon...
+## My Utility Bot
 
-- **Kamie's Utility Bot:** My Discord Server's Bot. Source Code will be available soon.
+My Discord Bot! Go [here](https://github.com/TheKamboy/kfd-utility-bot) to learn
+more.
+
+## Coming Soon
+
+Nothing yet...
